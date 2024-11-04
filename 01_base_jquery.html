@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .highlight{
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        $(document).ready(()=>{
+            // 01. jquery 셀렉터
+            $('.highlight').css("background-color", "yellow")
+
+            // 02. 이벤트 처리
+            $('#changeText').click(() => {
+                $('#targetDiv').text('새로운 텍스트')
+            })
+
+            // 03. jquery 애니메이션
+            $('#toggleDiv').click(() => {
+                $('#myDiv').fadeToggle();
+            })
+            
+            // 04. AJAX요청
+            $("#loadData").click(() => {
+                $.ajax({
+                    url: "https://jsonplaceholder.typicode.com/posts/1",
+                    method: "GET",
+                    success: (data) => {
+                        $("#dataContainer").text(`Title: ${data.title}`)
+                    },
+                    error: () => {
+                        $("#dataContainer").text("failed to fetching data")
+                    }
+                })
+            })
+
+            // 05. 클래스 추가 및 제거
+            $("#toggleHighlight").click(() => {
+                $("#highlightDiv").toggleClass("highlight");
+            })
+        })
+        </script>
+</head>
+<body>
+    <h1>01. jquery 셀렉터</h1>
+    <p class="highlight">첫 번째 문단</p>
+    <p>두 번째 문단</p>
+    <p class="highlight">세 번째 문단</p>
+
+    <hr/>
+
+    <h1>02. 이벤트 처리</h1>
+    <button id="changeText">텍스트 변경</button>
+    <div id="targetDiv">기존 텍스트</div>
+
+    <hr/>
+
+    <h1>03. jquery 애니메이션</h1>
+    <button id="toggleDiv">보이기/숨기기</button>
+    <div id="myDiv" style="display: none;">안녕하세요</div>
+
+    <hr/>
+
+    <h1>04. AJAX요청</h1>
+    <button id="loadData">데이터 불러오기</button>
+    <div id="dataContainer"></div>
+
+    <hr/>
+
+    <h1>05. 클래스 추가 및 제거</h1>
+    <button id="toggleHighlight">하이라이트 토글</button>
+    <div id="highlightDiv">클래스 토글 테스트</div>
+
+</body>
+</html>
